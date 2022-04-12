@@ -5,7 +5,7 @@ services:
   catalog-service:
     depends_on:
       - polar-postgres
-    image: "catalog-service"
+    image: "fabricio211/catalog-service"
     container_name: "catalog-service"
     ports:
       - 9001:9001
@@ -21,7 +21,7 @@ services:
       - SPRING_PROFILES_ACTIVE=testdata
   
   config-service:
-    image: "config-service"
+    image: "fabricio211/config-service"
     container_name: "config-service"
     ports:
       - 8888:8888
