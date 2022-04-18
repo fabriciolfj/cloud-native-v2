@@ -24,3 +24,11 @@
 
 ### Octant
 - Ferramenta que tem por objetivo inspecionar um cluste kubernetes
+
+### Kubeval
+- Efetua validação dos manifestos do kubernetes
+- No exemplo abaixo, ele verifica se existe alguma propriedade desconhecida, pelo schema kubernetes com base em sua versão
+
+```
+kubeval --strict -d k8s
+```
