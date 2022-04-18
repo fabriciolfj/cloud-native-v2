@@ -24,6 +24,7 @@
 
 ### Octant
 - Ferramenta que tem por objetivo inspecionar um cluste kubernetes
+- Apos a instalação, apenas execute octant no terminal
 
 ### Kubeval
 - Efetua validação dos manifestos do kubernetes
