@@ -33,3 +33,5 @@
 ```
 kubeval --strict -d k8s
 ```
+
+## Aplicações reativas
