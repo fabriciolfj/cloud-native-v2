@@ -21,3 +21,6 @@
 ```                
 ### Tilt
 - Ferramenta que ajuda na geração de imagens e implantação de manifestos no seu ambiente local kubernetes.
+
+### Octant
+- Ferramenta que tem por objetivo inspecionar um cluste kubernetes
