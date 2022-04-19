@@ -39,3 +39,6 @@ kubeval --strict -d k8s
   - uma thread por solicitação
   - encadeia chamadas, ou seja, somente da a resposta quando todas as dependências sejam sanadas
 - em aplicações reativas não envolve a alocação exclusiva de uma thread, mas o processo e realizado de forma assíncrona com base em eventos.
+- uma das características das app reativas é o backpressure, onde o consumidor controla a quantidade de dados que consegui consumir.
+- não confunda  app reativo como melhoria de performance, e sim, melhorar a escalabilidade e resiliência.
+- programação reativa é antiga, em java ficou famosa graças a especificação REACTIVE STREAMS e sua simplementações, como: project reactor, rxjava e vertx.
