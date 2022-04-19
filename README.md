@@ -35,3 +35,7 @@ kubeval --strict -d k8s
 ```
 
 ## Aplicações reativas
+- em aplicações imperativas funciona da seguinte forma: 
+  - uma thread por solicitação
+  - encadeia chamadas, ou seja, somente da a resposta quando todas as dependências sejam sanadas
+- em aplicações reativas não envolve a alocação exclusiva de uma thread, mas o processo e realizado de forma assíncrona com base em eventos.
