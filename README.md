@@ -42,3 +42,5 @@ kubeval --strict -d k8s
 - uma das características das app reativas é o backpressure, onde o consumidor controla a quantidade de dados que consegui consumir.
 - não confunda  app reativo como melhoria de performance, e sim, melhorar a escalabilidade e resiliência.
 - programação reativa é antiga, em java ficou famosa graças a especificação REACTIVE STREAMS e sua simplementações, como: project reactor, rxjava e vertx.
+
+### Projeto Reactor
