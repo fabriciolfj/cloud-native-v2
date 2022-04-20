@@ -49,3 +49,7 @@ kubeval --strict -d k8s
 ### Projeto Reactor
 - uma implementação da especificação reactive streams
 - tudo é lidado como evento reativo e existe 2 tipos principais: Mono 0-1 evento e Flux 0-N eventos.
+
+#### Clientes reativos
+- dentro do projeto webflux, temos o webclient para realizar interações com outras apis externas, sem bloqueio
+- da suporte a operadores reativos para resiliencia, como: timeout() - tempo limite, retryWhen() - retentativas e onError() - falha
