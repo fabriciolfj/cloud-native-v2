@@ -1,4 +1,7 @@
 # Cloud native 
+- projetos participantes
+  - catalog-service
+  - order-service-v2 
 - ferramenta para verificar vulnerabilidades https://github.com/anchore/grype
   - command: grype . (na raiz do projeto) 
 
@@ -44,3 +47,5 @@ kubeval --strict -d k8s
 - programação reativa é antiga, em java ficou famosa graças a especificação REACTIVE STREAMS e sua simplementações, como: project reactor, rxjava e vertx.
 
 ### Projeto Reactor
+- uma implementação da especificação reactive streams
+- tudo é lidado como evento reativo e existe 2 tipos principais: Mono 0-1 evento e Flux 0-N eventos.
