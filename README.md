@@ -53,3 +53,12 @@ kubeval --strict -d k8s
 #### Clientes reativos
 - dentro do projeto webflux, temos o webclient para realizar interações com outras apis externas, sem bloqueio
 - da suporte a operadores reativos para resiliencia, como: timeout() - tempo limite, retryWhen() - retentativas e onError() - falha
+
+#### Resiliencia
+- resiliencia é a capacidade do aplicativo continuar disponível, diante de falhas.
+- existem algumas estratégias para isolar o ponto de falha, que na maioria das vezes é a comunicação com mudo externo, por exemplo: chamada http para
+outra aplicação.
+- estratégias:
+  - timeouts: para situações onde o tempo de respota da api servidora, não é o ideal.
+  - retry: realizar retentativas com atraso crescente, diante de uma erro. Cuidado para operações que não são idempotentes. Para o reactor existe o retryWhen() e este é relevante a posição aonde o inseri (antes do timeout, o tempo definido no timeout e aplicado ao retry geral, por exemplo: 2 segundos para as 3 retentativas, já após o timeout, o tempo definido neste é aplicado a cada retry) 
+  - fallbacks , retornar uma valor default ou uma informação relevante, caso o serviço dependente esteja inoperante ou uma falha aceitavel, como por exemplo um recurso inexistente.
