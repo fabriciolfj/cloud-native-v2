@@ -61,4 +61,4 @@ outra aplicação.
 - estratégias:
   - timeouts: para situações onde o tempo de respota da api servidora, não é o ideal.
   - retry: realizar retentativas com atraso crescente, diante de uma erro. Cuidado para operações que não são idempotentes. Para o reactor existe o retryWhen() e este é relevante a posição aonde o inseri (antes do timeout, o tempo definido no timeout e aplicado ao retry geral, por exemplo: 2 segundos para as 3 retentativas, já após o timeout, o tempo definido neste é aplicado a cada retry) 
-  - fallbacks , retornar uma valor default ou uma informação relevante, caso o serviço dependente esteja inoperante ou uma falha aceitavel, como por exemplo um recurso inexistente.
+  - fallbacks , retornar uma valor default ou uma informação relevante, caso o serviço dependente esteja inoperante ou uma falha aceitavel, como por exemplo um recurso inexistente. Em caso de falhas aceitáveis, não faz sentido executar um retry, por isso o fallback deve ser utilizado antes do retryWhen().
