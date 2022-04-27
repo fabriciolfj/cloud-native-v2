@@ -86,3 +86,6 @@ resilience4j:
         timeoutDuration: 5s
 
 ```
+- a imagem abaixo demonstra o funcionamento dos recursos funcionando em conjunto
+
+https://github.com/fabriciolfj/cloud-native-v2/blob/main/my-java-image/CH09_F05_Vitale.png
