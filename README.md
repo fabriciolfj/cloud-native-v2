@@ -66,11 +66,14 @@ outra aplicação.
 ##### Resilience4j  e padrão circuit breaker
 - circuit breaker funciona da seguinte forma:
   - quando algum componente começa a apresentar falha, seja devido a comunicação externa, o circuito de abre
-  - com circuito aberto, o componente não é mais executado e um fallback , caso esteja configurado
-  - tem tempos o circuito fica semi-aberto, para validar se o componente voltou a funcionar
+  - com circuito aberto, o componente não é mais executado e sim um fallback , caso esteja configurado
+  - após um tempo o circuito fica semi-aberto, para validar se o componente voltou a funcionar
   - caso tenha sucesso na requisições, circuito volta para fechado, ao contrário, volta a ficar aberto  
 - o resilience4j é uma alternativa ao antigo hystrix 
-- podemos integra-lo ao circuit breaker do spring, adicionando algumas configurações como:
+- podemos integra-lo ao circuit breaker do spring, adicionando a dependencia abaixo e realizando algumas configurações como:
+```
+implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j'
+```
 ```
 resilience4j:
   circuitbreaker:
