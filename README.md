@@ -49,3 +49,40 @@ kubeval --strict -d k8s
 ### Projeto Reactor
 - uma implementação da especificação reactive streams
 - tudo é lidado como evento reativo e existe 2 tipos principais: Mono 0-1 evento e Flux 0-N eventos.
+
+#### Clientes reativos
+- dentro do projeto webflux, temos o webclient para realizar interações com outras apis externas, sem bloqueio
+- da suporte a operadores reativos para resiliencia, como: timeout() - tempo limite, retryWhen() - retentativas e onError() - falha
+
+#### Resiliencia
+- resiliencia é a capacidade do aplicativo continuar disponível, diante de falhas.
+- existem algumas estratégias para isolar o ponto de falha, que na maioria das vezes é a comunicação com mudo externo, por exemplo: chamada http para
+outra aplicação.
+- estratégias:
+  - timeouts: para situações onde o tempo de respota da api servidora, não é o ideal.
+  - retry: realizar retentativas com atraso crescente, diante de uma erro. Cuidado para operações que não são idempotentes. Para o reactor existe o retryWhen() e este é relevante a posição aonde o inseri (antes do timeout, o tempo definido no timeout e aplicado ao retry geral, por exemplo: 2 segundos para as 3 retentativas, já após o timeout, o tempo definido neste é aplicado a cada retry) 
+  - fallbacks , retornar uma valor default ou uma informação relevante, caso o serviço dependente esteja inoperante ou uma falha aceitavel, como por exemplo um recurso inexistente. Em caso de falhas aceitáveis, não faz sentido executar um retry, por isso o fallback deve ser utilizado antes do retryWhen().
+
+##### Resilience4j  e padrão circuit breaker
+- circuit breaker funciona da seguinte forma:
+  - quando algum componente começa a apresentar falha, seja devido a comunicação externa, o circuito de abre
+  - com circuito aberto, o componente não é mais executado e um fallback , caso esteja configurado
+  - tem tempos o circuito fica semi-aberto, para validar se o componente voltou a funcionar
+  - caso tenha sucesso na requisições, circuito volta para fechado, ao contrário, volta a ficar aberto  
+- o resilience4j é uma alternativa ao antigo hystrix 
+- podemos integra-lo ao circuit breaker do spring, adicionando algumas configurações como:
+```
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 20 #20 chamadas serao consideradas dentro da janela para analise
+        permittedNumberOfCallsInHalfOpenState: 5 # 5 chamadas no estado meio aberto
+        failureRateThreshold: 50 #das 20, 10 veio com erro, circuito é aberto
+        waitDurationInOpenState: 15000 #com o circuito aberto por 15s, faz transição para o semiaberto
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 5s
+
+```
