@@ -1,4 +1,5 @@
-include('../../../../config-service/Tiltfile')
-include('../../../../catalog-service/Tiltfile')
+include('/home/spark/Documentos/dados/repositorios_5/catalog-service/Tiltfile')
+include('/home/spark/Documentos/dados/repositorios_5/config-service/Tiltfile')
+include('/home/spark/Documentos/dados/repositorios_5/order-service-v2/Tiltfile')
 
 update_settings(max_parallel_updates=1)
