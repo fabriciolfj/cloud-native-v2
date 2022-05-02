@@ -100,3 +100,10 @@ resilience4j:
   - do lado do servidor, controlamos o número de solicitações recebidas por um serviço
 
 - do lado do servidor, o padrão é util em caso de gateways, para controlar a quantidade de solicitações, para isso utilizaremos o Spring cloud gateway com redis
+
+##### Limitador de requisição via redis
+- Base-se no algoritmo token bucket
+  - cada usuario recebe um bucket com um volume de tokens, com base na taxa de reabastecimento
+  - cada bucket tem uma capacidade máxima
+  - quando o usuário faz uma solicitação, um token e retirado do bucket
+  - para nosso caso, onde cada solicitação custe um token
