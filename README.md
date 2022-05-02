@@ -107,3 +107,4 @@ resilience4j:
   - cada bucket tem uma capacidade máxima
   - quando o usuário faz uma solicitação, um token e retirado do bucket
   - para nosso caso, onde cada solicitação custe um token
+- obs -> dentre os patterns de resiliência, o limitador de taxa e aplicado primeiro (na frente do circuit breaker e retry)
