@@ -92,3 +92,19 @@ resilience4j:
 - a imagem abaixo demonstra o funcionamento dos recursos funcionando em conjunto
 
 ![Alt text](https://github.com/fabriciolfj/cloud-native-v2/blob/main/my-java-image/CH09_F05_Vitale.png)
+
+#### Limitação de taxa
+- Padrão utilizado para controlar o tráfego enviado ou recebido de um aplicativo
+- Pode-se efetuar o controle do lado do servidor ou cliente.
+  - do lado do cliente, controlamos o número de solicitações a outros serviços por um período
+  - do lado do servidor, controlamos o número de solicitações recebidas por um serviço
+
+- do lado do servidor, o padrão é util em caso de gateways, para controlar a quantidade de solicitações, para isso utilizaremos o Spring cloud gateway com redis
+
+##### Limitador de requisição via redis
+- Base-se no algoritmo token bucket
+  - cada usuario recebe um bucket com um volume de tokens, com base na taxa de reabastecimento
+  - cada bucket tem uma capacidade máxima
+  - quando o usuário faz uma solicitação, um token e retirado do bucket
+  - para nosso caso, onde cada solicitação custe um token
+- obs -> dentre os patterns de resiliência, o limitador de taxa e aplicado primeiro (na frente do circuit breaker e retry)
