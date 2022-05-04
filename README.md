@@ -108,3 +108,9 @@ resilience4j:
   - quando o usuário faz uma solicitação, um token e retirado do bucket
   - para nosso caso, onde cada solicitação custe um token
 - obs -> dentre os patterns de resiliência, o limitador de taxa e aplicado primeiro (na frente do circuit breaker e retry)
+
+
+## Utilizando eventos
+- existem alguns tipos de acoplamentos, como:
+  - implantação: com o uso de uma interface rest, o cliente ou servidor, não precisa conhecer como é feita a respostas ou solicitação, isso é transparente,
+  - temporal: para compor uma reposta, um serviço precisa que outro esteja up, para mitigar esse risco podemos utilizar a comunicação via evento. 
