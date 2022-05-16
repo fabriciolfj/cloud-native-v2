@@ -114,3 +114,8 @@ resilience4j:
 - existem alguns tipos de acoplamentos, como:
   - implantação: com o uso de uma interface rest, o cliente ou servidor, não precisa conhecer como é feita a respostas ou solicitação, isso é transparente,
   - temporal: para compor uma reposta, um serviço precisa que outro esteja up, para mitigar esse risco podemos utilizar a comunicação via evento. 
+
+## Segurança
+### OIDC
+- é um protocolo que permite a uma aplicativo cliente, verifique a identidade de um usuário, com base na autenticação realizada por uma parte confiável e recupere as informações do usuário.
+- nesse contexto tempos 3 atores: authorization server, dono do recurso e o aplicativo cliente.
