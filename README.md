@@ -120,3 +120,10 @@ resilience4j:
 - é um protocolo que permite a uma aplicativo cliente, verifique a identidade de um usuário, com base na autenticação realizada por uma parte confiável e recupere as informações do usuário.
 - nesse contexto tempos 3 atores: authorization server, dono do recurso e o aplicativo cliente.
 - oidc é uma camada acima do auth2, que lida com a autenticação e o oauth2 lida com a autorização
+
+### Utilizando o oauth2Login()
+- Usuario acessa o endpoint protegido
+- aplicação redireciona ao authorization manager,
+- efetua o login
+- é redirecionado a aplicação com o token e esta o armazena, com um cookie de sessão (que e atrelado a este token dentro da app)
+- próximas requisições a aplicação utiliza o cookie de sessão para identificar o contexto do usuario (aonde encontra-se o token)
