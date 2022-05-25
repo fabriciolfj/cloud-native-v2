@@ -114,3 +114,22 @@ resilience4j:
 - existem alguns tipos de acoplamentos, como:
   - implantação: com o uso de uma interface rest, o cliente ou servidor, não precisa conhecer como é feita a respostas ou solicitação, isso é transparente,
   - temporal: para compor uma reposta, um serviço precisa que outro esteja up, para mitigar esse risco podemos utilizar a comunicação via evento. 
+
+## Segurança
+### OIDC (openid connect)
+- é um protocolo que permite a uma aplicativo cliente, verifique a identidade de um usuário, com base na autenticação realizada por uma parte confiável e recupere as informações do usuário.
+- nesse contexto tempos 3 atores: authorization server, dono do recurso e o aplicativo cliente.
+- oidc é uma camada acima do auth2, que lida com a autenticação e o oauth2 lida com a autorização
+
+### Utilizando o oauth2Login()
+- Usuario acessa o endpoint protegido
+- aplicação redireciona ao authorization manager,
+- efetua o login
+- é redirecionado a aplicação com o token e esta o armazena, com um cookie de sessão (que e atrelado a este token dentro da app)
+- próximas requisições a aplicação utiliza o cookie de sessão para identificar o contexto do usuario (aonde encontra-se o token)
+
+#### Token
+- id token: contem informações de autenticação do usuário
+  - é utilizado pelo serviço gateway, afim de configurar o contexto para a sessão do usuário e disponibilizar por meio do objeto OIDCUser
+- token de acesso: contem informações de autorização do usuário
+  - não é utilizado pelo gateway, pois o mesmo é apenas repassado aos serviços downstream, fica filter (procedimento conhecido como token relay) 
