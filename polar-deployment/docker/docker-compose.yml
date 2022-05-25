@@ -1,6 +1,45 @@
 version: "3.8"
 services:
 
+  dispatcher-service:
+    depends_on:
+#      - fluent-bit
+      - polar-rabbitmq
+    image: dispatcher-service
+    container_name: dispatcher-service
+    ports:
+      - 9003:9003
+      - 8003:8003
+    environment:
+      # Buildpacks environment variable to enable debug through a socket on port 8002
+      - BPL_DEBUG_ENABLED=true
+      - BPL_DEBUG_PORT=8003
+#      - JAVA_TOOL_OPTIONS=-javaagent:/workspace/BOOT-INF/lib/opentelemetry-javaagent-1.12.1.jar
+      - OTEL_SERVICE_NAME=dispatcher-service
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4317
+      - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
+      - SPRING_RABBITMQ_HOST=polar-rabbitmq
+
+  polar-ui:
+    image: "ghcr.io/polarbookshop/polar-ui:latest"
+    container_name: "polar-ui"
+    ports:
+      - 9004:9004
+    environment:
+      - PORT=9004
+    
+  polar-keycloak:
+    image: quay.io/keycloak/keycloak:17.0.0-legacy
+    container_name: "polar-keycloak"
+    volumes:
+      - ./keycloak:/opt/jboss/keycloak/imports
+    environment:
+      - KEYCLOAK_USER=user
+      - KEYCLOAK_PASSWORD=password
+      - KEYCLOAK_IMPORT=/opt/jboss/keycloak/imports/full-realm-export.json
+    ports:
+      - 8080:8080
+      
   polar-rabbitmq:
     image: rabbitmq:3.9-management
     container_name: polar-rabbitmq
@@ -26,11 +65,19 @@ services:
       - POLAR_CATALOG_SERVICE_URI=http://catalog-service:9001
       - SPRING_R2DBC_URL=r2dbc:postgresql://polar-postgres:5432/polardb_order
       - SPRING_FLYWAY_URL=jdbc:postgresql://polar-postgres:5432/polardb_order
+      - SPRING_R2DBC_USERNAME=user
+      - SPRING_R2DBC_PASSWORD=password
+      #- SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://polar-keycloak:8080/auth/realms/PolarBookshop
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://polar-keycloak:8080/auth/realms/PolarBookshop/protocol/openid-connect/certs
+#     - JAVA_TOOL_OPTIONS=-javaagent:/workspace/BOOT-INF/lib/opentelemetry-javaagent-1.12.1.jar
+      - OTEL_SERVICE_NAME=catalog-service
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4317
+      - SPRING_RABBITMQ_HOST=polar-rabbitmq
 
   catalog-service:
     depends_on:
       - polar-postgres
-    image: "fabricio211/catalog-service"
+    image: "catalog-service"
     container_name: "catalog-service"
     ports:
       - 9001:9001
@@ -41,9 +88,14 @@ services:
       # Buildpacks environment variable to enable debug through a socket on port 8001
       - BPL_DEBUG_ENABLED=true
       - BPL_DEBUG_PORT=8001
+ #     - JAVA_TOOL_OPTIONS=-javaagent:/workspace/BOOT-INF/lib/opentelemetry-javaagent-1.12.1.jar
+      - OTEL_SERVICE_NAME=order-service
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4317
       - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
       - SPRING_DATASOURCE_URL=jdbc:postgresql://polar-postgres:5432/polardb_catalog
       - SPRING_PROFILES_ACTIVE=testdata
+      #- SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://polar-keycloak:8080/auth/realms/PolarBookshop
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://polar-keycloak:8080/auth/realms/PolarBookshop/protocol/openid-connect/certs
   
   config-service:
     image: "fabricio211/config-service"
