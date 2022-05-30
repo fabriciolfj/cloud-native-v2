@@ -133,3 +133,9 @@ resilience4j:
   - é utilizado pelo serviço gateway, afim de configurar o contexto para a sessão do usuário e disponibilizar por meio do objeto OIDCUser
 - token de acesso: contem informações de autorização do usuário
   - não é utilizado pelo gateway, pois o mesmo é apenas repassado aos serviços downstream, fica filter (procedimento conhecido como token relay) 
+
+
+## Observabilidade
+- analisar o comportamento da aplicação, atráves de métricas, logs, traces
+- prever tendências de falhas com base em comportamento histórico
+obs: uma aplicação nativa na nuvem, precisa enviar os logs gerados a um agente externo
