@@ -149,3 +149,4 @@ obs: uma aplicação nativa na nuvem, precisa enviar os logs gerados a um agente
 - ver o percurso para atender uma solicitação
 - atualmente o formato e protocolo para gerar e propagar o rastreamento, é o openTelemetry
 - podemos utilizar diretamente ou fazer uso de uma fachada como o spring sleuth 
+- ferramenta em uso neste projeto, para armazenar e demonstrar os rastreamentos é o TEMPO
