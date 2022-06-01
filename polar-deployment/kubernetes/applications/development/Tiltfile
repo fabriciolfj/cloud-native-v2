@@ -1,7 +1,6 @@
-include('/home/spark/Documentos/repositorios/catalog-service/Tiltfile')
-include('/home/spark/Documentos/repositorios/config-service/Tiltfile')
-include('/home/spark/Documentos/repositorios/order-service-v2/Tiltfile')
-include('/home/spark/Documentos/repositorios/edge-service/Tiltfile')
-include('/home/spark/Documentos/repositorios/dispatcher-service/Tiltfile')
+include('/Users/fabriciojacob/Documents/repositorios/catalog-service/Tiltfile')
+include('/Users/fabriciojacob/Documents/repositorios/order-service-v2/Tiltfile')
+include('/Users/fabriciojacob/Documents/repositorios/edge-service/Tiltfile')
+include('/Users/fabriciojacob/Documents/repositorios/dispatcher-service/Tiltfile')
 
 update_settings(max_parallel_updates=1)
