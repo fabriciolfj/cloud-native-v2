@@ -133,3 +133,20 @@ resilience4j:
   - é utilizado pelo serviço gateway, afim de configurar o contexto para a sessão do usuário e disponibilizar por meio do objeto OIDCUser
 - token de acesso: contem informações de autorização do usuário
   - não é utilizado pelo gateway, pois o mesmo é apenas repassado aos serviços downstream, fica filter (procedimento conhecido como token relay) 
+
+
+## Observabilidade
+- analisar o comportamento da aplicação, atráves de métricas, logs, traces
+- prever tendências de falhas com base em comportamento histórico
+obs: uma aplicação nativa na nuvem, precisa enviar os logs gerados a um agente externo
+
+### Uso do micrometer
+- O spring boot expõe as metricas da aplicação através do actuator, no entanto caso queira expor para alguma ferramenta, deve-se fazer uso da lib da mesma.
+- o micrometer pega os dados gerados pelo actuator e o expõe em um formato que o prometheus consegui entender
+- devido ao grando uso do micrometer, seu padrão de exibição de métricas foi adotado pelo openTelemetrics/cncf
+
+### Rastreabilidade
+- ver o percurso para atender uma solicitação
+- atualmente o formato e protocolo para gerar e propagar o rastreamento, é o openTelemetry
+- podemos utilizar diretamente ou fazer uso de uma fachada como o spring sleuth 
+- ferramenta em uso neste projeto, para armazenar e demonstrar os rastreamentos é o TEMPO
