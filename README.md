@@ -150,3 +150,7 @@ obs: uma aplicação nativa na nuvem, precisa enviar os logs gerados a um agente
 - atualmente o formato e protocolo para gerar e propagar o rastreamento, é o openTelemetry
 - podemos utilizar diretamente ou fazer uso de uma fachada como o spring sleuth 
 - ferramenta em uso neste projeto, para armazenar e demonstrar os rastreamentos é o TEMPO
+
+### Testes
+- para testar a resiliência da aplicação: https://codecentric.github.io/chaos-monkey-spring-boot/
+- para testar a performance da aplicação: https://gatling.io/
