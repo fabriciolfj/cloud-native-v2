@@ -1,0 +1,2 @@
+ #faça o login antes argocd login localhost:8080
+ argocd app create catalog-service --repo https://github.com/fabriciolfj/catalog-service.git --path k8s --dest-server https://kubernetes.default.svc --dest-namespace test --sync-policy auto --auto-prune
