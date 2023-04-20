@@ -2,6 +2,8 @@
 - projetos participantes
   - catalog-service
   - order-service-v2 
+  - edge-service
+  - dispatcher-service
 - ferramenta para verificar vulnerabilidades https://github.com/anchore/grype
   - command: grype . (na raiz do projeto) 
 
